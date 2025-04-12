@@ -1,0 +1,17 @@
+{
+    "es": [
+      "el", "la", "los", "las", "un", "una", "unos", "unas",
+      "de", "del", "al", "que", "y", "o", "u", "en", "por", "para",
+      "con", "sin", "se", "es", "su", "sus", "como", "a", "lo", "más",
+      "pero", "ya", "le", "sí", "no", "ni", "este", "esta", "estos",
+      "estas", "eso", "esa", "esos", "esas"
+    ],
+    "en": [
+      "the", "and", "or", "but", "a", "an", "in", "on", "at", "by",
+      "for", "with", "without", "to", "from", "of", "that", "this",
+      "those", "these", "is", "are", "was", "were", "be", "been",
+      "being", "it", "its", "as", "if", "not", "no", "yes", "do",
+      "does", "did", "have", "has", "had"
+    ]
+  }
+  

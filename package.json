@@ -1,0 +1,40 @@
+{
+  "name": "txtspy",
+  "version": "1.0.0",
+  "description": "Roadmap del proyecto txtspy – CLI para buscar texto en archivos 1. Definición del objetivo Crear un CLI con Node.js que permita buscar palabras o frases dentro de archivos de texto.",
+  "main": "index.js",
+  "type": "module",
+  "bin": {
+    "txtspy": "./bin/txtspy.ts"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  },
+  "scripts": {
+    "start": "node dist/bin/txtspy.js",
+    "dev": "tsx watch bin/txtspy.ts",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "chalk": "^5.4.1",
+    "yargs": "^17.7.2"
+  },
+  "devDependencies": {
+    "@types/chalk": "^0.4.31",
+    "@types/node": "^22.14.0",
+    "@types/yargs": "^17.0.33",
+    "@typescript-eslint/eslint-plugin": "^8.29.1",
+    "@typescript-eslint/parser": "^8.29.1",
+    "eslint": "^9.24.0",
+    "eslint-config-prettier": "^10.1.2",
+    "eslint-plugin-prettier": "^5.2.6",
+    "prettier": "^3.5.3",
+    "ts-standard": "^12.0.2",
+    "tsx": "^4.19.3",
+    "typescript": "^5.8.3"
+  }
+}
