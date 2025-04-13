@@ -3,9 +3,10 @@
 
 # Documentation
 
-[![English](https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg)](docs/en/README.md)
+[<img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" width="40">](docs/en/README.md)
 
-[![Español](https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg)](docs/es/README.md)
+[<img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg" width="40">](docs/es/README.md)
+
 
 
 
