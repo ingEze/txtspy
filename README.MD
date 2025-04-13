@@ -3,8 +3,10 @@
 
 # Documentation
 
-[![English](https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg)](docs/en/README.md)  
+[![English](https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg)](docs/en/README.md)
+
 [![Español](https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg)](docs/es/README.md)
+
 
 
 **txtspy** is a command-line tool designed to analyze and process text files efficiently. This tool is flexible and allows you to customize its behavior with various options and flags.
