@@ -73,7 +73,7 @@ Options:
 - `--lang <language>`: Specify language for stopwords (en|es)
 - `--all`: Include all words (do not filter stopwords)
 - `--stopwords`: Display the list of stopwords being filtered
-- `--top`: Show the top most frequent words based on the number specified
+- `--top <number>`: Show the top most frequent words based on the number specified
 
 Example:
 ```bash
