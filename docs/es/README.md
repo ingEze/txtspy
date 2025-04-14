@@ -46,7 +46,7 @@ txtspy search <palabra> <archivo>
 
 Ejemplo:
 ```bash
-txtspy search "función" src/utils.js
+txtspy search "function" src/utils.js
 ```
 
 #### Buscar una palabra en múltiples archivos
@@ -72,7 +72,7 @@ Opciones:
 - `--lang <idioma>`: Especificar idioma para stopwords (en|es)
 - `--all`: Incluir todas las palabras (no filtrar stopwords)
 - `--stopwords`: Mostrar la lista de stopwords que se están filtrando
-- `--top`: Muestra el top de palabras más frecuentes según el número indicado por el usuario
+- `--top <número>`: Muestra el top de palabras más frecuentes según el número indicado por el usuario
 
 Ejemplo:
 ```bash
