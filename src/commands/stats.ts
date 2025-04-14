@@ -2,7 +2,10 @@ import fs from 'node:fs/promises'
 import { FunctionViewStats } from "../../types"
 import { getStopWords } from '../utils/stopwords'
 import chalk from 'chalk'
-import { getStopwordsLang, setStopwordsLang } from '../middleware/lang'
+import { getLang, getStopwordsLang, setStopwordsLang } from '../middleware/lang'
+
+import { tLogsStats } from '../i18n'
+let currentLang = getLang()
 
 export const commandStats: FunctionViewStats = async ({ file, exclude, all, lang, stopwords, top }) => {
     try {
@@ -27,7 +30,7 @@ export const commandStats: FunctionViewStats = async ({ file, exclude, all, lang
         const stopwordsList = getStopWords(stopwordsLanguage)
 
         if (stopwords) {
-            console.log(`Language stopwords: ${chalk.green.bold(stopwordsLanguage)}\n`)
+            console.log(`${tLogsStats('LOG_STOPWORDS_LANG', currentLang)}: ${chalk.green.bold(stopwordsLanguage)}\n`)
             return console.log(stopwordsList)
         }
 
@@ -61,22 +64,22 @@ export const commandStats: FunctionViewStats = async ({ file, exclude, all, lang
 
         const mostCommon = sorted[0]
 
-        console.log(`Idioma de las stopwords ${chalk.green.bold(stopwordsLanguage)}`)
-        console.log(chalk.bold(`📊 Estadísticas de ${chalk.underline(file)}:`));
+        console.log(`${tLogsStats('LOG_STOPWORDS_LANG', currentLang)} ${chalk.green.bold(stopwordsLanguage)}`)
+        console.log(chalk.bold(`📊 ${tLogsStats('LOG_STATS', currentLang)} ${chalk.underline(file)}:`));
         console.log('──────────────────────────────')
-        console.log(`📝 Líneas: ${chalk.green(totalLines)}`)
-        console.log(`🔤 Palabras: ${chalk.green(totalWords)}`)
-        console.log(`🔁 Palabras únicas: ${chalk.green(uniqueWords)}`)
+        console.log(`📝 ${tLogsStats('LOG_LINES', currentLang)} ${chalk.green(totalLines)}`)
+        console.log(`🔤 ${tLogsStats('LOG_WORDS', currentLang)}: ${chalk.green(totalWords)}`)
+        console.log(`🔁 ${tLogsStats('LOG_WORDS_UNIQUE', currentLang)}: ${chalk.green(uniqueWords)}`)
 
-        if(mostCommon) console.log(`🏆 Palabra más común: ${chalk.yellow(`"${mostCommon[0]}"`)} (${mostCommon[1]} veces)`)
+        if(mostCommon) console.log(`🏆 ${tLogsStats('LOG_MOST_COMMON_WORD', currentLang)}: ${chalk.yellow(`"${mostCommon[0]}"`)} (${mostCommon[1]} ${tLogsStats('LOG_TIMES', currentLang)})`)
 
-        console.log(`🔝 Top ${!top ? '5' : top } palabras:`)
+        console.log(`🔝 ${tLogsStats('LOG_TOP',currentLang)} ${!top ? '5' : top } ${tLogsStats('LOG_TOP_WORDS', currentLang)}:`)
             sorted.forEach(([word, count], i) => {
                 console.log(`   ${i + 1}. ${chalk.cyan(word)} ${count}`)
             })
     } catch (err) {
         const error = err as Error
-        console.error(chalk.red(`⚠️ Error al leer el archivo: ${file}`))
+        console.error(chalk.red(`⚠️ ${tLogsStats('LOG_ERRROR_READ_FILE', currentLang)}: ${file}`))
         console.error(error.message)
     }
 }

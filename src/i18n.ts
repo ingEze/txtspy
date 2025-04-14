@@ -37,6 +37,62 @@ const translations = {
   }
 }
 
+const translationsLogsFileStats = {
+  "es": {
+    LOG_STOPWORDS_LANG: 'Idioma de las stopwords',
+    LOG_STATS: 'Estadísticas de',
+    LOG_LINES: 'Líneas',
+    LOG_WORDS:  'Palabras',
+    LOG_WORDS_UNIQUE: 'Palabras únicas',
+    LOG_MOST_COMMON_WORD: 'Palabra más común',
+    LOG_TIMES: 'veces',
+    LOG_TOP: 'Top',
+    LOG_TOP_WORDS: 'palabras',
+    LOG_ERRROR_READ_FILE: 'Error al leer el archivo'
+  },
+  "en": {
+    LOG_STOPWORDS_LANG: "Stopwords language",
+    LOG_STATS: 'Statistics of',
+    LOG_LINES: 'Lines',
+    LOG_WORDS: 'Words',
+    LOG_WORDS_UNIQUE: 'Unique words',
+    LOG_MOST_COMMON_WORD: 'Most common word',
+    LOG_TIMES: 'times',
+    LOG_TOP: 'Top',
+    LOG_TOP_WORDS: 'words',
+    LOG_ERRROR_READ_FILE: 'Error reading the file'
+  }
+}
+
+const translationsLogsFileSearch = {
+  "es": {
+    LOG_LINE: 'Línea',
+    LOG_FILE: 'Archivo',
+    LOG_NOT_FOUND_WORD: 'No se encontro la palabra que buscas',
+    LOG_ERROR_READING_FILE: 'No se pudo leer el archivo',
+    LOG_WORD_NOT_FOUND_IN_FILE: 'no contiene la palabra que buscas',
+    LOG_WORD_FOUND_COUNT: 'Veces encontrada la palabra',
+    LOG_ERROR_READING_FILES: 'No se pudo leer los archivos'
+  },
+  "en": {
+    LOG_LINE: 'Line',
+    LOG_FILE: 'File',
+    LOG_NOT_FOUND_WORD: 'The word you are looking for was not found',
+    LOG_ERROR_READING_FILE: 'The file could not be read',
+    LOG_WORD_NOT_FOUND_IN_FILE: 'does not contain the word you are looking for',
+    LOG_WORD_FOUND_COUNT: 'Times the word was found',
+    LOG_ERROR_READING_FILES: 'The files could not be read'
+  }
+}
+
 export const t = (key: keyof typeof translations['en'], lang: Lang) => {
-  return translations[lang][key];
+  return translations[lang][key]
+}
+
+export const tLogsStats = (key: keyof typeof translationsLogsFileStats['en'], lang: Lang) => {
+  return translationsLogsFileStats[lang][key]
+}
+
+export const tLogSearch = (key: keyof typeof translationsLogsFileSearch['en'], lang: Lang) => {
+  return translationsLogsFileSearch[lang][key]
 }

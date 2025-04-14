@@ -4,6 +4,12 @@ import fs from 'node:fs/promises'
 
 import { FunctionSearchCommand, FunctionSearchMultiFileCommand } from '../../types'
 
+import { tLogSearch } from '../i18n'
+import { getLang } from '../middleware/lang'
+
+
+let currentLang = getLang()
+
 function highlightWordInContext(line: string, word: string) {
     const words = line.split(' ')
     const wordIndex = words.findIndex(w => w.includes(word))
@@ -25,14 +31,14 @@ export const searchCommand: FunctionSearchCommand = async ({ word, file }) => {
                 const previewWord = highlightWordInContext(line, word)
                 const styledWord = previewWord.join(' ').replace(word, chalk.white.bgRed.bold(word))
 
-                console.log(`Line: ${index + 1} - ${styledWord}`)
+                console.log(`${tLogSearch('LOG_LINE', currentLang)}: ${index + 1} - ${styledWord}`)
             }
         })
 
-        if (found === false) console.error(`No se encontro la palabra que buscas en el archivo - ${file}`)
+        if (found === false) console.error(`${tLogSearch('LOG_NOT_FOUND_WORD', currentLang)} - ${tLogSearch('LOG_FILE', currentLang)}: ${file}`)
     } catch (err) {
         const error = err as Error
-        console.error('No se pudo leer el archivo', error.message)
+        console.error(tLogSearch('LOG_ERROR_READING_FILE', currentLang), error.message)
         throw new Error(error.message)
     }
 
@@ -59,10 +65,10 @@ export const searchCommandMultiFile: FunctionSearchMultiFileCommand = async ({ w
                 const previewWord = highlightWordInContext(line, word)
                 const styledWord = previewWord.join(' ').replace(word, chalk.white.bgRed.bold(word))
                 const styledFileName = chalk.blueBright.bold(file)
-                console.log(`Archivo: ${styledFileName} - Linea: ${index + 1} - ${styledWord}`)
+                console.log(`${tLogSearch('LOG_FILE', currentLang)}: ${styledFileName} - ${tLogSearch('LOG_LINE', currentLang)}: ${index + 1} - ${styledWord}`)
             }
         })
-        if(foundFile === false) console.log(`Archivo: ${file} no contiene la palabra que buscas: ${word}`)
+        if(foundFile === false) console.log(`${tLogSearch('LOG_FILE', currentLang)}: ${file} ${tLogSearch('LOG_WORD_NOT_FOUND_IN_FILE', currentLang)}: ${word}`)
 
         lines2.forEach((line, index) => {
             if(line.includes(word)) {
@@ -71,20 +77,20 @@ export const searchCommandMultiFile: FunctionSearchMultiFileCommand = async ({ w
                 const previewWord = highlightWordInContext(line, word)
                 const styledWord = previewWord.join(' ').replace(word, chalk.white.bgRedBright.bold(word))
                 const styledFileName = chalk.cyan.bold(file2)
-                console.log(`Archivo: ${styledFileName} - Linea: ${index + 1} - ${styledWord}`)
+                console.log(`${tLogSearch('LOG_FILE', currentLang)}: ${styledFileName} - ${tLogSearch('LOG_LINE', currentLang)}: ${index + 1} - ${styledWord}`)
             }
         })
         if (foundFile2 === false) {
-            console.log(`Archivo: ${file2} no contiene la palabra que buscas: ${word}`)
+            console.log(`${tLogSearch('LOG_FILE', currentLang)}: ${file2} ${tLogSearch('LOG_WORD_NOT_FOUND_IN_FILE', currentLang)}: ${word}`)
         } else {
             console.log(`
-Archivo ${chalk.blueBright.bold(file)} - Veces encontrada la palabra ${chalk.red.bold(word)}: ${chalk.green.bold(counterFile)}
-Archivo ${chalk.cyan.bold(file2)} - Veces encontrada la palabra ${chalk.redBright.bold(word)}: ${chalk.greenBright.bold(counterFile2)}
+${tLogSearch('LOG_FILE', currentLang)} ${chalk.blueBright.bold(file)} - ${tLogSearch('LOG_WORD_FOUND_COUNT', currentLang)} ${chalk.red.bold(word)}: ${chalk.green.bold(counterFile)}
+${tLogSearch('LOG_FILE', currentLang)} ${chalk.cyan.bold(file2)} - ${tLogSearch('LOG_WORD_FOUND_COUNT', currentLang)} ${chalk.redBright.bold(word)}: ${chalk.greenBright.bold(counterFile2)}
                 `)
         }
     } catch(err){
         const error = err as Error
-        console.error('No se pudo leer los archivos', error.message)
+        console.error(`${tLogSearch('LOG_ERROR_READING_FILES', currentLang)}: ` , error.message)
         throw new Error(error.message)
     }
 }
