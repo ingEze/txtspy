@@ -25,3 +25,18 @@ export type FunctionViewStats = (argv: {
     lang?: string[],
     stopwords?: boolean
 }) => void
+
+
+export type CommentPattern = {
+    single: string
+    multiStart?: string
+    multiEnd?: string
+}
+
+export interface CommentsCommandsArgv {
+    file: string
+    comments: boolean
+    noStrict: boolean
+}
+
+export type FunctionCommentCommands = (argv: { file: string, noStrict: boolean }) => void

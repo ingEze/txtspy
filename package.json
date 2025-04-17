@@ -5,7 +5,7 @@
   "main": "dist/txtspy.js",
   "type": "module",
   "bin": {
-    "txtspy": "dist/bin/txtspy.js"
+    "txtspy": "./dist/bin/txtspy.js"
   },
   "directories": {
     "lib": "lib",
@@ -27,11 +27,11 @@
     "url": "https://github.com/ingEze/txtspy.git"
   },
   "keywords": [
-  "cli", 
-  "text", 
-  "search", 
-  "command-line-tool", 
-  "text-processing"
+    "cli",
+    "text",
+    "search",
+    "command-line-tool",
+    "text-processing"
   ],
   "author": "Ezequiel Saucedo",
   "license": "MIT",

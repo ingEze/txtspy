@@ -1,13 +1,16 @@
 import fs from 'node:fs/promises'
-import { FunctionViewStats } from "../../types"
-import { getStopWords } from '../utils/stopwords'
-import chalk from 'chalk'
-import { getLang, getStopwordsLang, setStopwordsLang } from '../middleware/lang'
 
-import { tLogsStats } from '../i18n'
+import chalk from 'chalk'
+
+import { FunctionViewStats } from "../../types"
+import { getStopWords } from '../utils/stopwords.js'
+import { getLang, getStopwordsLang, setStopwordsLang } from '../middleware/lang/lang.js'
+import { tLogsStats } from '../i18n.js'
+
 let currentLang = getLang()
 
 export const commandStats: FunctionViewStats = async ({ file, exclude, all, lang, stopwords, top }) => {
+    
     try {
         if (lang) {
             const langValue = typeof lang === 'string' && (lang === 'es' || lang === 'en') ? lang as 'es' | 'en' : 'en'

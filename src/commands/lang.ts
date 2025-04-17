@@ -1,5 +1,5 @@
 import { Arguments } from "yargs"
-import { setLang } from "../middleware/lang" 
+import { setLang } from "../middleware/lang/lang.js" 
 import chalk from "chalk"
 
 export const changeLangCommand = (argv: Arguments<{ lang: 'en' | 'es' }>) => {

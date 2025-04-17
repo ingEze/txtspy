@@ -4,8 +4,8 @@ import fs from 'node:fs/promises'
 
 import { FunctionSearchCommand, FunctionSearchMultiFileCommand } from '../../types'
 
-import { tLogSearch } from '../i18n'
-import { getLang } from '../middleware/lang'
+import { tLogSearch } from '../i18n.js'
+import { getLang } from '../middleware/lang/lang.js'
 
 
 let currentLang = getLang()

@@ -1,17 +1,18 @@
 #!/usr/bin/env node
 import * as yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
-import pkg from '../package.json'
+import pkg from '../package.json' with { type: 'json' }
 
-import { ChangeLangCommand, SearchCommandArgs, SearchMultiFileCommandArgs } from '../types'
+import { ChangeLangCommand, CommentsCommandsArgv, SearchCommandArgs, SearchMultiFileCommandArgs } from '../types'
 
-import { t } from '../src/i18n' 
+import { t } from '../src/i18n.js' 
 
-import { searchCommand, searchCommandMultiFile } from '../src/commands/search'
-import { commandStats } from '../src/commands/stats'
-import { getLang } from '../src/middleware/lang'
-import { changeLangCommand } from '../src/commands/lang'
+import { searchCommand, searchCommandMultiFile } from '../src/commands/search.js'
+import { commandStats } from '../src/commands/stats.js'
+import { getLang } from '../src/middleware/lang/lang.js'
+import { changeLangCommand } from '../src/commands/lang.js'
 import chalk from 'chalk'
+import { commandComments } from '../src/commands/comments'
 
 let currentLang = getLang()
 
@@ -104,6 +105,22 @@ yargs.default(hideBin(process.argv))
     () => {
       console.log(t('MY_LANG', currentLang), chalk.green(getLang()))
     }
+  )
+  .command<CommentsCommandsArgv>(
+    'comments <file>',
+    'Permite ver los comentarios de un archivo',
+    (yargs) => {
+      yargs
+        .positional('file', {
+          describe: 'Archivo que sea analizar',
+          type: 'string'
+        })
+        .option('noStrict', {
+          describe: 'Quita el modo estricto',
+          type: 'boolean'
+        })
+    },
+    commandComments
   )
   .demandCommand(1, t('INSERT_VALID', currentLang))
   .help()
