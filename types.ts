@@ -36,7 +36,7 @@ export type CommentPattern = {
 export interface CommentsCommandsArgv {
     file: string
     comments: boolean
-    noStrict: boolean
+    strict: boolean
 }
 
-export type FunctionCommentCommands = (argv: { file: string, noStrict: boolean }) => void
+export type FunctionCommentCommands = (argv: { file: string, strict: boolean }) => void

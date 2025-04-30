@@ -12,7 +12,7 @@ import { commandStats } from '../src/commands/stats.js'
 import { getLang } from '../src/middleware/lang/lang.js'
 import { changeLangCommand } from '../src/commands/lang.js'
 import chalk from 'chalk'
-import { commandComments } from '../src/commands/comments'
+import { commandComments } from '../src/commands/comments.js'
 
 let currentLang = getLang()
 
@@ -112,12 +112,13 @@ yargs.default(hideBin(process.argv))
     (yargs) => {
       yargs
         .positional('file', {
-          describe: 'Archivo que sea analizar',
-          type: 'string'
+          type: 'string',
+          describe: 'Archivo que sea analizar'
         })
-        .option('noStrict', {
+        .option('strict', {
+          type: 'boolean',
           describe: 'Quita el modo estricto',
-          type: 'boolean'
+          default: true
         })
     },
     commandComments

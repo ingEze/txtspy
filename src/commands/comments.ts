@@ -3,10 +3,10 @@ import readline from 'node:readline'
 import { createReadStream } from "node:fs"
 
 import chalk from "chalk"
-import { getCommentPattern } from "../middleware/CommentPatterns/CommentPatterns"
+import { getCommentPattern } from "../middleware/CommentPatterns/CommentPatterns.js"
 import { FunctionCommentCommands } from "../../types"
 
-export const commandComments: FunctionCommentCommands = async ({ file, noStrict }) => {
+export const commandComments: FunctionCommentCommands = async ({ file, strict }) => {
     try {
             const ext = path.extname(file)
             const commentsObj = getCommentPattern(ext)
@@ -51,18 +51,18 @@ export const commandComments: FunctionCommentCommands = async ({ file, noStrict 
                 })
             })
 
-            if (openComments.length > 0 && !noStrict) {
+            if (openComments.length > 0 && !strict) {
                 openComments.sort((a, b) => a.line - b.line)
                 const unclosedComment = openComments[0]
                 console.error(
                     chalk.red.bold(`❌ ERROR: Comentario iniciado pero no cerrado. Línea: ${unclosedComment.line}`)
                 )
-                console.error(chalk.yellow.bold('Si desea continuar igual, ingrese la flag --noStrict'))
+                console.error(chalk.yellow.bold('Si desea continuar igual, ingrese la flag --no-strict'))
                 process.exit(1)
                 
             }
 
-            if (noStrict || openComments.length === 0) {
+            if (strict || openComments.length === 0) {
                 index = 0
                 openComments.length = 0
 
@@ -129,7 +129,7 @@ export const commandComments: FunctionCommentCommands = async ({ file, noStrict 
                 
                 results.forEach(result => console.log(result))
                 
-                if (openComments.length > 0 && noStrict) {
+                if (openComments.length > 0 && strict) {
                     // Ordenar por línea para mostrar primero el más antiguo
                     openComments.sort((a, b) => a.line - b.line)
                     const unclosedComment = openComments[0]

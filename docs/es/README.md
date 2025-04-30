@@ -26,7 +26,7 @@ El proyecto se publicará pronto en NPM. Por ahora, se puede clonar y ejecutar l
 git clone https://github.com/your-username/txtspy.git
 cd txtspy
 npm install
-npx tsx bin/txtspy.ts
+npx txtspy <cmd>
 ```
 
 ## Uso
@@ -82,6 +82,20 @@ txtspy stats documento.txt --lang es
 ```bash
 txtspy stats documento.txt --top 7
 ```
+
+### Mostrar comentarios de un archivo
+```bash
+txtspy comments <archivo> [opciones]
+```
+
+> Si no se agrega una opción, el comando funcionará en *modo estricto*.
+
+Opciones:
+- `--no-strict`: Se analizará el archivo en modo *no estricto*.
+
+¿Qué es el modo estricto?
+El *modo estricto* valida que todos los comentarios estén correctamente abiertos y cerrados.
+Si se encuentra un comentario mal formado (por ejemplo, iniciado pero sin cierre), el análisis se detiene y se muestra una alerta.
 
 #### Cambiar idioma
 

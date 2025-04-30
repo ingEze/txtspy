@@ -26,7 +26,7 @@ The project will soon be published on NPM. For now, you can clone and run it loc
 git clone https://github.com/your-username/txtspy.git
 cd txtspy
 npm install
-npx tsx bin/txtspy.ts
+npx txtspy <cmd>
 ```
 
 ## Usage
@@ -83,6 +83,20 @@ txtspy stats document.txt --lang es
 ```bash
 txtspy stats document.txt --top 7
 ```
+
+### Show comments from a file
+```bash
+txtspy comments <file> [options]
+```
+
+> If no option is provided, the command will run in *strict mode*
+
+Options
+- `--no-strict`: Analyze the file in *non-strict mode*.
+
+What is strict mode?
+*Strict mode* ensures that all comments are properly opened and closed.
+If a malformed comment is found (e.g., one that is opened but not closed), the analysis stops and an alert is displayed.
 
 #### Change language
 
