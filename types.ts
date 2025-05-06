@@ -39,4 +39,11 @@ export interface CommentsCommandsArgv {
     strict: boolean
 }
 
+export interface ScanCommandsArgv {
+    folderPath: string
+}
+
 export type FunctionCommentCommands = (argv: { file: string, strict: boolean }) => void
+
+export type FunctionReadFolderCommands = (argv: { folderPath: string }) => void
+

@@ -3,16 +3,17 @@ import * as yargs from 'yargs'
 import { hideBin } from 'yargs/helpers'
 import pkg from '../package.json' with { type: 'json' }
 
-import { ChangeLangCommand, CommentsCommandsArgv, SearchCommandArgs, SearchMultiFileCommandArgs } from '../types'
-
-import { t } from '../src/i18n.js' 
+import { ChangeLangCommand, CommentsCommandsArgv, ScanCommandsArgv, SearchCommandArgs, SearchMultiFileCommandArgs } from '../types'
 
 import { searchCommand, searchCommandMultiFile } from '../src/commands/search.js'
 import { commandStats } from '../src/commands/stats.js'
 import { getLang } from '../src/middleware/lang/lang.js'
 import { changeLangCommand } from '../src/commands/lang.js'
-import chalk from 'chalk'
 import { commandComments } from '../src/commands/comments.js'
+import { scanFolder } from '../src/commands/scan.js'
+import { t } from '../src/i18n.js' 
+
+import chalk from 'chalk'
 
 let currentLang = getLang()
 
@@ -20,7 +21,6 @@ yargs.default(hideBin(process.argv))
   .scriptName('txtspy')
   .usage(t('USAGE', currentLang))
   .version('version', t('VERSION_DESC', currentLang), pkg.version)
-  .alias('v', 'version')
   .command<SearchCommandArgs>(
     'search <word> <file>',
     t('SEARCH_DESC', currentLang),
@@ -123,8 +123,22 @@ yargs.default(hideBin(process.argv))
     },
     commandComments
   )
+  .command<ScanCommandsArgv>(
+    'scan <folderPath>',
+    'Escanea una carpeta y muestra los archivos legibles',
+    (yargs) => {
+      yargs
+        .positional('folderPath', {
+          type: 'string',
+          describe: 'Ruta o carpeta a analizar'
+        })
+    },
+    scanFolder
+  )
   .demandCommand(1, t('INSERT_VALID', currentLang))
   .help()
   .alias('h', 'help')
+  .alias('v', 'version')
+  .alias('scanFolder', 'scan')
   .strict()
   .parse()
