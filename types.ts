@@ -45,5 +45,5 @@ export interface ScanCommandsArgv {
 
 export type FunctionCommentCommands = (argv: { file: string, strict: boolean }) => void
 
-export type FunctionReadFolderCommands = (argv: { folderPath: string }) => void
+export type FunctionReadFolderCommands = (argv: { folderPath: string, search?: string }) => void
 

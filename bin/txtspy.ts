@@ -132,6 +132,10 @@ yargs.default(hideBin(process.argv))
           type: 'string',
           describe: 'Ruta o carpeta a analizar'
         })
+        .option('search', {
+          type: 'string',
+          describe: 'Buscar palabra en los archivos legibles'
+        })
     },
     scanFolder
   )

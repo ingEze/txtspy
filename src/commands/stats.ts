@@ -3,7 +3,7 @@ import fs from 'node:fs/promises'
 import chalk from 'chalk'
 
 import { FunctionViewStats } from "../../types"
-import { getStopWords } from '../utils/stopwords.js'
+import { getStopWords } from '../utils/stopwords/stopwords.js'
 import { getLang, getStopwordsLang, setStopwordsLang } from '../middleware/lang/lang.js'
 import { tLogsStats } from '../i18n.js'
 

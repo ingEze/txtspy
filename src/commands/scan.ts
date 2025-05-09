@@ -1,71 +1,42 @@
 import path from "node:path"
-import fs from 'node:fs/promises'
 
 import { FunctionReadFolderCommands } from "../../types"
-import { readableExtensions, ignoredDirs } from "../utils/scanUtils.js"
+import { readFolderRecursive } from "../feature/scan/readFolderRecursive.js"
 
 import chalk from "chalk"
-
-/**
- * Recursively reads a folder and counts readable and unreadable files.
- * @param dir - The directory to read.
- * @param prefix - The prefix used for formatting the folder structure in the console.
- * @returns An object containing the count of readable and unreadable files.
- */
-async function readFolderRecursive(dir: string, prefix = ''): Promise<{ readable: number, unreadable: number }> {
-    // Read all entries (files and directories) in the current directory
-    const entries = await fs.readdir(dir, { withFileTypes: true })
-
-    // Filter out ignored directories
-    const filtered = entries.filter(entry => !ignoredDirs.includes(entry.name))
-
-    // Sort directories before files for better display
-    filtered.sort((a, b) => Number(b.isDirectory()) - Number(a.isDirectory()))
-
-    // Initialize stats for readable and unreadable files
-    let stats = { readable: 0, unreadable: 0 }
-
-    // Iterate through each entry in the directory
-    for (let i = 0; i < filtered.length; i++) {
-        const entry = filtered[i]
-        const isLast = i === filtered.length - 1 // Check if this is the last entry
-        const connector = isLast ? '└── ' : '├── ' // Use different connectors for the tree structure
-        const nextPrefix = prefix + (isLast ? '    ' : '│   ') // Update the prefix for subdirectories
-        const fullPath = path.join(dir, entry.name) // Get the full path of the entry
-
-        if (entry.isDirectory()) {
-            // If the entry is a directory, log its name and recursively read its contents
-            console.log(`${prefix}${connector}${entry.name}/`)
-            const subStats = await readFolderRecursive(fullPath, nextPrefix)
-            stats.readable += subStats.readable
-            stats.unreadable += subStats.unreadable
-        } else {
-            // If the entry is a file, check its extension to determine if it's readable
-            const ext = path.extname(entry.name).toLowerCase()
-            const isReadable = readableExtensions.includes(ext)
-            const mark = isReadable ? chalk.green('✅') : chalk.red('❌') // Mark readable or unreadable files
-
-            // Log the file name with its status
-            console.log(`${prefix}${connector}${entry.name} ${mark}`)
-            isReadable ? stats.readable++ : stats.unreadable++
-        }
-    }
-
-    // Return the accumulated stats
-    return stats
-}
+import { scanDirectory } from "../feature/scan/scanDirectory.js"
 
 /**
  * Command handler for scanning a folder and displaying readable and unreadable files.
+ * 
+ * This function handles the `scan` command, which can either:
+ * 1. Search for a specific word in all files within a folder (and its subfolders).
+ * 2. Display the count of readable and unreadable files in the folder.
+ * 
  * @param folderPath - The path of the folder to scan.
+ * @param search - (--flag) The word to search for in the files.
  */
-export const scanFolder: FunctionReadFolderCommands = async({ folderPath }) => {
+export const scanFolder: FunctionReadFolderCommands = async ({ folderPath, search }) => {
   try { 
     // Resolve the absolute path of the folder
     const absolutePath = path.resolve(folderPath)
     console.log(`📁 Folder: ${chalk.greenBright.bold(path.basename(absolutePath))}`)
+    
+    // If a search term is provided, search for it in the folder
+    if (search){
+      console.log(`📎 Searched word: ${chalk.cyanBright.underline.bold(search?.trim())}\n`)
+      console.log('🔍 Files:')
+      const searchValue = search.trim()
+      const foundMatches = await scanDirectory(absolutePath, searchValue) // Perform the search
+      if (!foundMatches) {
+        // If no matches are found, display a message
+        console.log(chalk.redBright.bold(`❌ No matches found for ${chalk.blueBright.bold(`"${searchValue}"`)}`))
+      }
 
-    // Recursively read the folder and get stats
+      return // Exit after performing the search
+    }
+
+    // If no search term is provided, display readable/unreadable file stats
     const { readable, unreadable } = await readFolderRecursive(folderPath)
     const total = readable + unreadable
 
