@@ -3,6 +3,9 @@
 
 ![Node.js CI](https://github.com/ingEze/txtspy/workflows/Node.js%20CI/badge.svg)
 
+[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/ingEze/txtspy)
+
+
 # Documentation / Documentación
 
 [<img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" width="40">](docs/en/README.md)
