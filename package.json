@@ -20,7 +20,8 @@
     "start": "node dist/bin/txtspy.js",
     "build": "esbuild bin/txtspy.ts --bundle --platform=node --target=node18 --outfile=dist/bin/txtspy.js --banner:js='#!/usr/bin/env node' --minify --format=esm",
     "dev": "tsx watch bin/txtspy.ts",
-    "test": "jest"
+    "test": "jest",
+    "docs": "typedoc --out docs src --entryPointStrategy expand"
   },
   "repository": {
     "type": "git",
@@ -56,6 +57,7 @@
     "ts-jest": "^29.3.4",
     "ts-standard": "^12.0.2",
     "tsx": "^4.19.3",
+    "typedoc": "^0.28.4",
     "typescript": "^5.8.3"
   }
 }
