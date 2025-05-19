@@ -54,4 +54,8 @@ txtspy is under active development. Current development priorities include:
 - Web page URL analysis
 - Processing large files with stream support
 
+## Changelog
+
+For detailed information about each release, see the [Changelog](./CHANGELOG.md).
+
 For complete documentation on all available commands and options, please refer to the documentation in the `/docs` folder for your preferred language.
