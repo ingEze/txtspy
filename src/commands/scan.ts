@@ -9,6 +9,7 @@ import { tLogScan } from '../i18n.js'
 import { type FunctionScanCommand } from '../../types'
 
 import chalk from 'chalk'
+import { ignoredDirs } from '../utils/scan/scanFilters.js'
 const currentLang = getLang()
 
 /**
@@ -24,7 +25,8 @@ const currentLang = getLang()
  * @param comments - (Optional, --comments flag) If true, displays the comments in the files.
  * @param strict - (Optional, --no-strict flag) When set to false, disables strict mode for comment scanning.
  */
-export const scanFolder: FunctionScanCommand = async ({ folderPath, search, comments, strict }) => {
+export const scanFolder: FunctionScanCommand = async ({ folderPath, search, comments, strict, ignore }) => {
+  let ignoredDirsBackup: string[] | undefined
   try {
     // Resolve the absolute path of the folder
     const absolutePath = path.resolve(folderPath)
@@ -53,6 +55,11 @@ export const scanFolder: FunctionScanCommand = async ({ folderPath, search, comm
       return
     }
 
+    if (ignore?.trim() !== undefined && ignore?.trim() !== '') {
+      ignoredDirsBackup = [...ignoredDirs]
+      ignoredDirs.push(ignore)
+    }
+
     // If no search term is provided, display readable/unreadable file stats
     const { readable, unreadable } = await readFolderRecursive(folderPath)
     const total = readable + unreadable
@@ -63,5 +70,10 @@ export const scanFolder: FunctionScanCommand = async ({ folderPath, search, comm
   } catch (err) {
     // Handle errors and display the error message
     console.error(`❌ ${tLogScan('LOG_ERROR', currentLang)}:`, (err as Error).message)
+  } finally {
+    if (ignoredDirsBackup != null) {
+      ignoredDirs.length = 0
+      ignoredDirs.push(...ignoredDirsBackup)
+    }
   }
 }

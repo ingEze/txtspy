@@ -24,7 +24,8 @@ export const translations = {
     SCAN_COMMENTS_DESC: 'Mostrar solo archivos con comentarios',
     SCAN_STRICT_DESC: 'Modo estricto para comentarios en archivos',
     OPEN_DESC: 'Abrir un archivo en el editor predeterminado',
-    OPEN_FILE_DESC: 'Archivo a abrir'
+    OPEN_FILE_DESC: 'Archivo a abrir',
+    IGNORE_DIRS_DESC: 'Ignora una carpeta en específico'
   },
   en: {
     USAGE: '$0 <cmd> [args]',
@@ -51,6 +52,7 @@ export const translations = {
     SCAN_COMMENTS_DESC: 'Show only files with comments',
     SCAN_STRICT_DESC: 'Strict mode for comments in files',
     OPEN_DESC: 'Open a file in the default editor',
-    OPEN_FILE_DESC: 'File to open'
+    OPEN_FILE_DESC: 'File to open',
+    IGNORE_DIRS_DESC: 'Ignore a specific folder'
   }
 }

@@ -100,12 +100,13 @@ Supported file types for comment extraction:
 ```bash
 txtspy scan <directory> [options]
 ```
-> If no option is provided, the `scan` command displays the structure of the specified directory and highlights which files are readable or unreadable based on their extensions.
+> If no option is provided, the `scan` command displays the structure of the specified directory and highlights which files are readable or unreadable based on their file extensions.
 
 Options:
 - `--search <word>`: Search for a specific word in all files in the directory
 - `--comments`: Extract and display comments from all code files in the directory
-- `--strict`: Use with --comments to enforce proper comment formatting (default mode)
+- `--no-strict`: Use with --comments to enforce proper comment formatting (default mode: *strict*)
+- `--ignore <directory>, -I <directory>`: Specify a directory name to ignore during scanning 
 
 Example:
 ```bash
@@ -119,8 +120,14 @@ txtspy scan ./src --search "function"
 txtspy scan ./src --comments
 
 # Extract comments with strict validation
-txtspy scan ./src --comments --strict
+txtspy scan . --comments --no-strict
+
+# Scan directory while ignoring test
+txtspy scan . --ignore test
+# Or using the short alias
+txtspy scan . -I test
 ```
+
 
 #### Open a file or directory
 

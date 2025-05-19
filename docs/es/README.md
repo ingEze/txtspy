@@ -48,7 +48,7 @@ txtspy search "function" src/utils.js
 
 También puedes pasar varios archivos separados por espacios:
 ```bash
-txtspy search console.log src/index.ts src/utils.ts
+txtspy search console.log src/utils.js src/controllers.js
 ```
 
 #### Generar estadísticas de un archivo
@@ -104,7 +104,8 @@ txtspy scan <directorio> [opciones]
 Opciones:
 - `--search <palabra>`: Busca una palabra específica en todos los archivos del directorio
 - `--comments`: Extrae y muestra los comentarios de todos los archivos de código en el directorio
-- `--bo-strict`: Usar con --comments para forzar un formato de comentario correcto (modo predeterminado)
+- `--no-strict`: Usar con --comments para forzar un formato de comentario correcto (modo predeterminado: *strict*)
+- `--ignore <directorio>, -I <directorio>`: Especifica un nombre de directorio a ignorar durante el escaneo
 
 Ejemplo:
 ```bash
@@ -119,6 +120,11 @@ txtspy scan ./src --comments
 
 # Extraer comentarios con validación estricta
 txtspy scan ./src --comments --no-strict
+
+# Escanear directorio ignorando test/
+txtspy scan . --ignore test
+# O usando el alias corto
+txtspy scan . -I node_modules
 ```
 
 #### Abrir un archivo o directorio

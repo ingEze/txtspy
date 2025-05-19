@@ -39,6 +39,8 @@ export interface ScanCommandsArgv {
   folderPath: string
   search: string
   comments: boolean
+  strict: boolean
+  ignore: string
 }
 
 export interface OpenCommandsArgv {
@@ -47,6 +49,6 @@ export interface OpenCommandsArgv {
 
 export type FunctionCommentCommand = (argv: { file: string, strict: boolean }) => Promise<void>
 
-export type FunctionScanCommand = (argv: { folderPath: string, search?: string, comments?: boolean, strict?: boolean }) => Promise<void>
+export type FunctionScanCommand = (argv: { folderPath: string, search?: string, comments?: boolean, strict?: boolean, ignore?: string }) => Promise<void>
 
 export type FunctionOpenCommand = (argv: { file: string }) => Promise<void>

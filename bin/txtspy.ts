@@ -158,6 +158,10 @@ await yargs.default(hideBin(process.argv))
         describe: t('SCAN_STRICT_DESC', currentLang),
         default: true
       })
+      .option('ignore', {
+        type: 'string',
+        describe: t('IGNORE_DIRS_DESC', currentLang)
+      })
   },
   scanFolder
 )
@@ -183,5 +187,6 @@ await yargs.default(hideBin(process.argv))
   .alias('h', 'help')
   .alias('v', 'version')
   .alias('scanFolder', 'scan')
+  .alias('I', 'ignore')
   .strict()
   .parse()
