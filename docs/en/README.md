@@ -1,32 +1,29 @@
 # txtspy
 
-txtspy is a command-line tool (CLI) for analyzing text files. It provides statistics such as the number of words and characters, identifies the most frequent words, and filters out stopwords. It is designed to support multiple languages (currently English and Spanish) and is under active development.
-
-> ⚠️ This project is currently in development.
+txtspy is a command-line tool (CLI) for analyzing text files and managing directories. It provides statistics such as the number of words and characters, identifies the most frequent words, and filters out stopwords. It supports multiple languages (currently English and Spanish) and includes powerful text analysis features.
 
 ## Features
 
-- Analyze one or more text files.
-- Display word frequency statistics.
-- Generate detailed content statistics including word count and frequency.
-- Filter out stopwords from the analysis.
-- Support for multiple languages (English | Spanish).
-- Command-line interface with intuitive commands and flags.
-- Language switching at runtime.
-- Planned features:
-  - Export analysis as a `.txt` file.
-  - Analyze web pages via URL.
-  - Support for `--big` flag to handle large files using streams.
+- Analyze one or more text files
+- Search for words or phrases across files
+- Display word frequency statistics
+- Generate detailed content statistics including word count and frequency
+- Extract comments from programming files
+- Filter out stopwords from analysis
+- Scan directories to display file structure
+- Search for specific words within all files in a directory
+- Extract and analyze comments in code files
+- Open files or directories with the default application
+- Support for multiple languages (English | Spanish)
+- Command-line interface with intuitive commands and flags
+- Language switching at runtime
 
 ## Installation
 
-The project will soon be published on NPM. For now, you can clone and run it locally:
+Install globally from NPM:
 
 ```bash
-git clone https://github.com/your-username/txtspy.git
-cd txtspy
-npm install
-npx txtspy <cmd>
+npm install -g txtspy
 ```
 
 ## Usage
@@ -37,7 +34,7 @@ txtspy <cmd> [args]
 
 ### Available Commands
 
-#### Search for a word in a file
+#### Search for a word in one or more files
 > You can use quotes to search for a phrase
 
 ```bash
@@ -49,16 +46,9 @@ Example:
 txtspy search "function" src/utils.js
 ```
 
-#### Search for a word in multiple files
-> You can use quotes to search for a phrase
-
+You can also search in multiple files by listing them separated by spaces:
 ```bash
-txtspy multi <word> <file1> <file2>
-```
-
-Example:
-```bash
-txtspy multi import src/index.ts src/utils.ts
+txtspy search console.log src/utils.js src/controllers.js
 ```
 
 #### Generate statistics from a file
@@ -66,14 +56,13 @@ txtspy multi import src/index.ts src/utils.ts
 ```bash
 txtspy stats <file> [options]
 ```
-
 > If no option is provided, statistics will be shown with stopwords filtered
 
 Options:
 - `--lang <language>`: Specify language for stopwords (en|es)
 - `--all`: Include all words (do not filter stopwords)
 - `--stopwords`: Display the list of stopwords being filtered
-- `--top`: Show the top most frequent words based on the number specified
+- `--top <number>`: Show the top most frequent words based on the number specified
 
 Example:
 ```bash
@@ -84,19 +73,74 @@ txtspy stats document.txt --lang es
 txtspy stats document.txt --top 7
 ```
 
-### Show comments from a file
+#### Extract comments from a file
+
 ```bash
 txtspy comments <file> [options]
 ```
-
 > If no option is provided, the command will run in *strict mode*
 
-Options
-- `--no-strict`: Analyze the file in *non-strict mode*.
+Options:
+- `--no-strict`: Analyze the file in *non-strict mode*
 
 What is strict mode?
 *Strict mode* ensures that all comments are properly opened and closed.
 If a malformed comment is found (e.g., one that is opened but not closed), the analysis stops and an alert is displayed.
+
+Supported file types for comment extraction:
+- JavaScript (.js)
+- TypeScript (.ts)
+- Python (.py)
+- Java (.java)
+- C (.c)
+- C++ (.cpp)
+
+#### Scan a directory
+
+```bash
+txtspy scan <directory> [options]
+```
+> If no option is provided, the `scan` command displays the structure of the specified directory and highlights which files are readable or unreadable based on their extensions.
+
+Options:
+- `--search <word>`: Search for a specific word in all files in the directory
+- `--comments`: Extract and display comments from all code files in the directory
+- `--strict`: Use with --comments to enforce proper comment formatting (default mode)
+
+Example:
+```bash
+# Show directory structure with readable/unreadable files
+txtspy scan ./src
+
+# Search for a specific word in all files
+txtspy scan ./src --search "function"
+
+# Extract comments from all files in the directory
+txtspy scan ./src --comments
+
+# Extract comments with strict validation
+txtspy scan ./src --comments --strict
+```
+
+#### Open a file or directory
+
+```bash
+txtspy open <path>
+```
+
+Opens a file or directory with the default application associated with it.
+
+Example:
+```bash
+# Open current directory
+txtspy open .
+
+# Open a specific file
+txtspy open ./src/index.js
+
+# Open a specific directory
+txtspy open ./src
+```
 
 #### Change language
 
@@ -131,14 +175,9 @@ txtspy --version
 txtspy -v
 ```
 
-## Development Status
+## Future Features
 
-This project is still under active development. Upcoming features include:
+Development continues on txtspy with these planned enhancements:
 
-### Support for Large File Streaming
-
-A new `--big` flag will be implemented to efficiently process large files using Node.js streams. This will allow txtspy to handle very large text files without excessive memory usage.
-
-### Web Analysis
-
-Future versions will support analyzing text content directly from URLs. This feature will extract textual data from web pages and generate word frequency and other statistics, which can then be downloaded as a `.txt` file.
+- Exporting analysis as a `.txt` file
+- Analyzing web pages via URL

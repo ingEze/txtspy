@@ -1,32 +1,29 @@
 # txtspy
 
-txtspy es una herramienta de línea de comandos(CLI) para analizar archivos de texto. Proporciona estadísticas como el número de palabras y caracteres, identifica las palabras más frecuentes y filtra las stopwords. Está diseñada para soportar múltiples idiomas (actualmente inglés y español) y se encuentra en desarrollo activo.
-
-> ⚠️ Este proyecto está actualmente en desarrollo.
+txtspy es una herramienta de línea de comandos (CLI) para analizar archivos de texto y gestionar directorios. Proporciona estadísticas como el número de palabras y caracteres, identifica las palabras más frecuentes y filtra las stopwords. Está diseñada para soportar múltiples idiomas (actualmente inglés y español) e incluye potentes funciones de análisis de texto.
 
 ## Funcionalidades
 
-- Analiza uno o más archivos de texto.
-- Muestra estadísticas de frecuencia de palabras.
+- Analiza uno o más archivos de texto
+- Busca palabras o frases en varios archivos
+- Muestra estadísticas de frecuencia de palabras
 - Genera estadísticas sobre el contenido de archivos, incluyendo el conteo y la frecuencia de palabras
-- Filtra las stopwords del análisis.
-- Soporte para múltiples idiomas (inglés y español).
-- Interfaz por línea de comandos con comandos y flags intuitivos.
-- Cambio de idioma en ejecución.
-- Funcionalidades planificadas:
-  - Descargar análisis como archivo `.txt`.
-  - Análisis de páginas web mediante URL.
-  - Soporte de flag --big para escaneo de archivos grandes mediante streams.
+- Extrae comentarios de archivos de programación
+- Filtra las stopwords del análisis
+- Escanea directorios para mostrar la estructura de archivos
+- Busca palabras específicas en todos los archivos de un directorio
+- Extrae y analiza comentarios en archivos de código
+- Abre archivos o directorios con la aplicación predeterminada
+- Soporte para múltiples idiomas (inglés y español)
+- Interfaz por línea de comandos con comandos y flags intuitivos
+- Cambio de idioma en ejecución
 
 ## Instalación
 
-El proyecto se publicará pronto en NPM. Por ahora, se puede clonar y ejecutar localmente:
+Instala globalmente desde NPM:
 
 ```bash
-git clone https://github.com/your-username/txtspy.git
-cd txtspy
-npm install
-npx txtspy <cmd>
+npm install -g txtspy
 ```
 
 ## Uso
@@ -37,28 +34,21 @@ txtspy <cmd> [args]
 
 ### Comandos Disponibles
 
-#### Buscar una palabra en un archivo
+#### Buscar una palabra en un archivo o más
 > Utilizando "" puedes buscar una frase
 
 ```bash
-txtspy search <palabra> <archivo>
+txtspy search <palabra> <archivo> 
 ```
 
 Ejemplo:
 ```bash
-txtspy search "función" src/utils.js
+txtspy search "function" src/utils.js
 ```
 
-#### Buscar una palabra en múltiples archivos
-> Utilizando "" puedes buscar una frase
-
+También puedes pasar varios archivos separados por espacios:
 ```bash
-txtspy multi <palabra> <archivo1> <archivo2>
-```
-
-Ejemplo:
-```bash
-txtspy multi import src/index.ts src/utils.ts
+txtspy search console.log src/index.ts src/utils.ts
 ```
 
 #### Generar estadísticas de un archivo
@@ -72,7 +62,7 @@ Opciones:
 - `--lang <idioma>`: Especificar idioma para stopwords (en|es)
 - `--all`: Incluir todas las palabras (no filtrar stopwords)
 - `--stopwords`: Mostrar la lista de stopwords que se están filtrando
-- `--top`: Muestra el top de palabras más frecuentes según el número indicado por el usuario
+- `--top <número>`: Muestra el top de palabras más frecuentes según el número indicado por el usuario
 
 Ejemplo:
 ```bash
@@ -83,11 +73,10 @@ txtspy stats documento.txt --lang es
 txtspy stats documento.txt --top 7
 ```
 
-### Mostrar comentarios de un archivo
+#### Extraer comentarios de un archivo
 ```bash
 txtspy comments <archivo> [opciones]
 ```
-
 > Si no se agrega una opción, el comando funcionará en *modo estricto*.
 
 Opciones:
@@ -96,6 +85,61 @@ Opciones:
 ¿Qué es el modo estricto?
 El *modo estricto* valida que todos los comentarios estén correctamente abiertos y cerrados.
 Si se encuentra un comentario mal formado (por ejemplo, iniciado pero sin cierre), el análisis se detiene y se muestra una alerta.
+
+Tipos de archivo soportados para extracción de comentarios:
+- JavaScript (.js)
+- TypeScript (.ts)
+- Python (.py)
+- Java (.java)
+- C (.c)
+- C++ (.cpp)
+
+#### Escanear un directorio
+
+```bash
+txtspy scan <directorio> [opciones]
+```
+> Si no se pasa ninguna opción, el comando `scan` muestra la estructura del directorio especificado y resalta qué archivos son legibles o ilegibles según sus extension
+
+Opciones:
+- `--search <palabra>`: Busca una palabra específica en todos los archivos del directorio
+- `--comments`: Extrae y muestra los comentarios de todos los archivos de código en el directorio
+- `--bo-strict`: Usar con --comments para forzar un formato de comentario correcto (modo predeterminado)
+
+Ejemplo:
+```bash
+# Mostrar estructura de directorio con archivos legibles/ilegibles
+txtspy scan ./src
+
+# Buscar una palabra específica en todos los archivos
+txtspy scan ./src --search "function"
+
+# Extraer comentarios de todos los archivos en el directorio
+txtspy scan ./src --comments
+
+# Extraer comentarios con validación estricta
+txtspy scan ./src --comments --no-strict
+```
+
+#### Abrir un archivo o directorio
+
+```bash
+txtspy open <ruta>
+```
+
+Abre un archivo o directorio con la aplicación predeterminada asociada.
+
+Ejemplo:
+```bash
+# Abrir directorio actual
+txtspy open .
+
+# Abrir un archivo específico
+txtspy open ./src/index.js
+
+# Abrir un directorio específico
+txtspy open ./src
+```
 
 #### Cambiar idioma
 
@@ -130,14 +174,9 @@ txtspy --version
 txtspy -v
 ```
 
-## Estado de Desarrollo
+## Funcionalidades Futuras
 
-Este proyecto aún está en desarrollo. Próximas funcionalidades incluyen:
+El desarrollo de txtspy continúa con estas mejoras planificadas:
 
-### Soporte para Streaming de Archivos
-
-Se implementará una nueva bandera `--big` para procesar archivos grandes de manera eficiente utilizando streams de Node.js. Esto permitirá a TxtSpy analizar archivos de texto muy grandes sin un uso excesivo de memoria.
-
-### Análisis Web
-
-Versiones futuras incluirán la capacidad de analizar contenido web directamente desde URLs. Esta característica extraerá contenido textual de sitios web y proporcionará estadísticas sobre frecuencia de palabras y otras métricas, las estadísticas podrán descargarse en un archivo `.txt`.
+- Exportar análisis como archivo `.txt`
+- Analizar páginas web mediante URL

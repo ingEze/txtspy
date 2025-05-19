@@ -1,23 +1,57 @@
-
 # txtspy
 
-# Documentation
+
+![Node.js CI](https://github.com/ingEze/txtspy/workflows/Node.js%20CI/badge.svg)
+
+# Documentation / Documentación
 
 [<img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" width="40">](docs/en/README.md)
 
 [<img src="https://upload.wikimedia.org/wikipedia/commons/9/9a/Flag_of_Spain.svg" width="40">](docs/es/README.md)
 
-
-
-
-**txtspy** is a command-line tool designed to analyze and process text files efficiently. This tool is flexible and allows you to customize its behavior with various options and flags.
+**txtspy** is a command-line tool designed to analyze and process text files efficiently. With multiple commands for searching, analyzing, and managing files and directories, it offers a comprehensive solution for developers and text analysts.
 
 ## Features
 
-- **Text File Analysis**: It enables fast processing of both large and small text files.
-- **Multilingual Support**: The output adapts to the user’s language, with options to work in different languages.
-- **Customization**: It offers various customizable flags to adjust the tool’s behavior according to user needs.
+- **Text File Analysis**: Process text files for statistics and insights
+- **Word Search**: Find words or phrases across single or multiple files
+- **Directory Management**: Scan directory structures and open files or folders
+- **Code Analysis**: Extract and validate comments from programming files
+- **Multilingual Support**: Full support for English and Spanish interfaces
 
+## Installation
 
-Refer to the documentation in the `/docs` folder for more details on available options and flags.
+```bash
+npm install -g txtspy
+```
 
+After installation, you can use txtspy from anywhere in your terminal:
+
+```bash
+txtspy <command> [options]
+```
+
+## Quick Start
+
+```bash
+# Search for a word in a file
+txtspy search "function" myfile.js
+
+# Get statistics for a text file
+txtspy stats document.txt
+
+# Scan a directory structure
+txtspy scan ./src
+
+# Open a file or directory
+txtspy open ./myfile.js
+```
+
+## Development Status
+
+txtspy is under active development. Current development priorities include:
+- Exporting analysis as text files
+- Web page URL analysis
+- Processing large files with stream support
+
+For complete documentation on all available commands and options, please refer to the documentation in the `/docs` folder for your preferred language.

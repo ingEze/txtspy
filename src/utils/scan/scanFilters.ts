@@ -17,14 +17,14 @@ export const readableExtensions = [
   '.java',
   '.c',
   '.cpp',
-  '.sh',
+  '.sh'
 ]
 
 export const ignoredDirs = [
   'node_modules',
   'dist',
-  '.gitignore', 
-  'build', 
+  '.gitignore',
+  'build',
   '.git',
-  '.DS_Store',
-] 
+  '.DS_Store'
+]

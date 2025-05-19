@@ -1,49 +1,52 @@
 export interface SearchCommandArgs {
-    word: string
-    file: string
+  word: string
+  files: string[]
 }
 
-export interface SearchMultiFileCommandArgs {
-    word: string
-    file: string
-    file2: string
+export interface StatsCommnadArgs {
+  word: string
+  file: string
 }
 
-export interface ChangeLangCommand { 
-    lang: 'en' | 'es'
+export interface ChangeLangCommand {
+  lang: 'en' | 'es'
 }
 
-export type FunctionSearchCommand = (argv: { word:string, file: string }) => void
+export type FunctionSearchCommand = (argv: { word: string, files: string[] }) => Promise<void>
 
-export type FunctionSearchMultiFileCommand = (argv: { word:string, file:string, file2:string }) => void
+export type FunctionViewStats = (argv: {
+  file: string
+  exclude?: string
+  all?: string
+  top?: number
+  lang?: string[]
+  stopwords?: boolean
+}) => Promise<void>
 
-export type FunctionViewStats = (argv: { 
-    file: string, 
-    exclude?: string, 
-    all?: string, 
-    top?: number, 
-    lang?: string[],
-    stopwords?: boolean
-}) => void
-
-
-export type CommentPattern = {
-    single: string
-    multiStart?: string
-    multiEnd?: string
+export interface CommentPattern {
+  single: string
+  multiStart?: string
+  multiEnd?: string
 }
 
 export interface CommentsCommandsArgv {
-    file: string
-    comments: boolean
-    strict: boolean
+  file: string
+  comments: boolean
+  strict: boolean
 }
 
 export interface ScanCommandsArgv {
-    folderPath: string
+  folderPath: string
+  search: string
+  comments: boolean
 }
 
-export type FunctionCommentCommands = (argv: { file: string, strict: boolean }) => void
+export interface OpenCommandsArgv {
+  file: string
+}
 
-export type FunctionReadFolderCommands = (argv: { folderPath: string, search?: string }) => void
+export type FunctionCommentCommand = (argv: { file: string, strict: boolean }) => Promise<void>
 
+export type FunctionScanCommand = (argv: { folderPath: string, search?: string, comments?: boolean, strict?: boolean }) => Promise<void>
+
+export type FunctionOpenCommand = (argv: { file: string }) => Promise<void>
