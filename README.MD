@@ -1,10 +1,13 @@
 # txtspy
 
-
-![Node.js CI](https://github.com/ingEze/txtspy/workflows/Node.js%20CI/badge.svg)
-
-[![Ask DeepWiki](https://deepwiki.com/badge.svg)](https://deepwiki.com/ingEze/txtspy)
-
+<p>
+  <a href="https://github.com/ingEze/txtspy/actions/workflows/node.js.yml">
+    <img src="https://github.com/ingEze/txtspy/workflows/Node.js%20CI/badge.svg" alt="Node.js CI" style="vertical-align: middle; margin-right: 10px;" />
+  </a>
+  <a href="https://deepwiki.com/ingEze/txtspy">
+    <img src="https://deepwiki.com/badge.svg" alt="Ask DeepWiki" style="vertical-align: middle;" />
+  </a>
+</p>
 
 # Documentation / Documentación
 
