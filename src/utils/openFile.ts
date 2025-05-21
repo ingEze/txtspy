@@ -19,6 +19,18 @@ function wslToWindowsPath (wslPath: string): string {
   }
 }
 
+/**
+ * Opens a file or directory using the default application for the current operating system.
+ *
+ * - On Windows or WSL, uses `cmd.exe` with the `start` command.
+ * - On macOS, uses the `open` command.
+ * - On Linux, uses the `xdg-open` command.
+ *
+ * Handles path conversion for WSL and Windows environments.
+ * Logs an error message if the file cannot be opened.
+ *
+ * @param dir - The path to the file or directory to open.
+ */
 export function openFile (dir: string): void {
   const fullPath = path.resolve(dir)
   const plataform = os.platform()

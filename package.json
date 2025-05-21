@@ -1,6 +1,6 @@
 {
   "name": "txtspy",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A CLI tool for text search",
   "main": "dist/bin/txtspy.js",
   "type": "module",
@@ -11,11 +11,17 @@
     "lib": "lib",
     "test": "test"
   },
+  "engines": {
+    "node": ">=18.0.0"
+  },
   "files": [
     "dist",
     "README.md",
     "LICENSE"
   ],
+  "exports": {
+    ".": "./dist/bin/txtspy.js"
+  },
   "scripts": {
     "start": "node dist/bin/txtspy.js",
     "build": "esbuild bin/txtspy.ts --bundle --platform=node --target=node18 --outfile=dist/bin/txtspy.js --banner:js='#!/usr/bin/env node' --minify --format=esm",

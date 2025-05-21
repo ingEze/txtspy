@@ -34,6 +34,14 @@ txtspy <cmd> [args]
 
 ### Comandos Disponibles
 
+`search`: Buscar una palabra en un archivo o más.
+`stats`: Generar estadísticas de un archivo.
+`comments`: Extraer comentarios de un archivo.
+`scan`: Escanear un directorio.
+`open`: Abrir un archivo o directorio.
+`lang`: Cambiar idioma.
+`my-lang`: Mostrar idioma actual.
+
 #### Buscar una palabra en un archivo o más
 > Utilizando "" puedes buscar una frase
 
