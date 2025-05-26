@@ -35,26 +35,29 @@ txtspy <cmd> [args]
 ### Comandos Disponibles
 
 `search`: Buscar una palabra en un archivo o más.
-`stats`: Generar estadísticas de un archivo.
-`comments`: Extraer comentarios de un archivo.
+`stats`: Generar estadísticas de un archivo.  
+`comments`: Extraer comentarios de un archivo.  
 `scan`: Escanear un directorio.
-`open`: Abrir un archivo o directorio.
+`open`: Abrir un archivo o directorio.  
 `lang`: Cambiar idioma.
 `my-lang`: Mostrar idioma actual.
 
 #### Buscar una palabra en un archivo o más
+
 > Utilizando "" puedes buscar una frase
 
 ```bash
-txtspy search <palabra> <archivo> 
+txtspy search <palabra> <archivo>
 ```
 
 Ejemplo:
+
 ```bash
 txtspy search "function" src/utils.js
 ```
 
 También puedes pasar varios archivos separados por espacios:
+
 ```bash
 txtspy search console.log src/utils.js src/controllers.js
 ```
@@ -64,15 +67,18 @@ txtspy search console.log src/utils.js src/controllers.js
 ```bash
 txtspy stats <archivo> [opciones]
 ```
+
 > Si no se coloca una opción, se mostrarán las estadísticas filtrando stopwords
 
 Opciones:
+
 - `--lang <idioma>`: Especificar idioma para stopwords (en|es)
 - `--all`: Incluir todas las palabras (no filtrar stopwords)
 - `--stopwords`: Mostrar la lista de stopwords que se están filtrando
 - `--top <número>`: Muestra el top de palabras más frecuentes según el número indicado por el usuario
 
 Ejemplo:
+
 ```bash
 txtspy stats documento.txt --lang es
 ```
@@ -82,19 +88,23 @@ txtspy stats documento.txt --top 7
 ```
 
 #### Extraer comentarios de un archivo
+
 ```bash
 txtspy comments <archivo> [opciones]
 ```
-> Si no se agrega una opción, el comando funcionará en *modo estricto*.
+
+> Si no se agrega una opción, el comando funcionará en _modo estricto_.
 
 Opciones:
-- `--no-strict`: Se analizará el archivo en modo *no estricto*.
+
+- `--no-strict`: Se analizará el archivo en modo _no estricto_.
 
 ¿Qué es el modo estricto?
-El *modo estricto* valida que todos los comentarios estén correctamente abiertos y cerrados.
+El _modo estricto_ valida que todos los comentarios estén correctamente abiertos y cerrados.
 Si se encuentra un comentario mal formado (por ejemplo, iniciado pero sin cierre), el análisis se detiene y se muestra una alerta.
 
 Tipos de archivo soportados para extracción de comentarios:
+
 - JavaScript (.js)
 - TypeScript (.ts)
 - Python (.py)
@@ -107,15 +117,18 @@ Tipos de archivo soportados para extracción de comentarios:
 ```bash
 txtspy scan <directorio> [opciones]
 ```
+
 > Si no se pasa ninguna opción, el comando `scan` muestra la estructura del directorio especificado y resalta qué archivos son legibles o ilegibles según sus extension
 
 Opciones:
+
 - `--search <palabra>`: Busca una palabra específica en todos los archivos del directorio
 - `--comments`: Extrae y muestra los comentarios de todos los archivos de código en el directorio
-- `--no-strict`: Usar con --comments para forzar un formato de comentario correcto (modo predeterminado: *strict*)
+- `--no-strict`: Usar con --comments para forzar un formato de comentario correcto (modo predeterminado: _strict_)
 - `--ignore <directorio>, -I <directorio>`: Especifica un nombre de directorio a ignorar durante el escaneo
 
 Ejemplo:
+
 ```bash
 # Mostrar estructura de directorio con archivos legibles/ilegibles
 txtspy scan ./src
@@ -144,6 +157,7 @@ txtspy open <ruta>
 Abre un archivo o directorio con la aplicación predeterminada asociada.
 
 Ejemplo:
+
 ```bash
 # Abrir directorio actual
 txtspy open .
@@ -164,6 +178,7 @@ txtspy lang <idioma>
 Idiomas soportados: `en` (Inglés), `es` (Español)
 
 Ejemplo:
+
 ```bash
 txtspy lang es
 ```
@@ -184,7 +199,7 @@ txtspy -h
 #### Versión
 
 ```bash
-txtspy --version 
+txtspy --version
 txtspy -v
 ```
 

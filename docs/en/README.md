@@ -34,15 +34,16 @@ txtspy <cmd> [args]
 
 ### Available Commands
 
-`search`: Search for a word in one or more files.  
+`search`: Search for a word in one or more files.
 `stats`: Generate statistics from a file.  
-`comments`: Extract comments from a file.  
-`scan`: Scan a directory.  
-`open`: Open a file or directory.  
+`comments`: Extract comments from a file.
+`scan`: Scan a directory.
+`open`: Open a file or directory.
 `lang`: Change language.  
 `my-lang`: Show current language.
 
 #### Search for a word in one or more files
+
 > You can use quotes to search for a phrase
 
 ```bash
@@ -50,11 +51,13 @@ txtspy search <word> <file>
 ```
 
 Example:
+
 ```bash
 txtspy search "function" src/utils.js
 ```
 
 You can also search in multiple files by listing them separated by spaces:
+
 ```bash
 txtspy search console.log src/utils.js src/controllers.js
 ```
@@ -64,15 +67,18 @@ txtspy search console.log src/utils.js src/controllers.js
 ```bash
 txtspy stats <file> [options]
 ```
+
 > If no option is provided, statistics will be shown with stopwords filtered
 
 Options:
+
 - `--lang <language>`: Specify language for stopwords (en|es)
 - `--all`: Include all words (do not filter stopwords)
 - `--stopwords`: Display the list of stopwords being filtered
 - `--top <number>`: Show the top most frequent words based on the number specified
 
 Example:
+
 ```bash
 txtspy stats document.txt --lang es
 ```
@@ -86,16 +92,19 @@ txtspy stats document.txt --top 7
 ```bash
 txtspy comments <file> [options]
 ```
-> If no option is provided, the command will run in *strict mode*
+
+> If no option is provided, the command will run in _strict mode_
 
 Options:
-- `--no-strict`: Analyze the file in *non-strict mode*
+
+- `--no-strict`: Analyze the file in _non-strict mode_
 
 What is strict mode?
-*Strict mode* ensures that all comments are properly opened and closed.
+_Strict mode_ ensures that all comments are properly opened and closed.
 If a malformed comment is found (e.g., one that is opened but not closed), the analysis stops and an alert is displayed.
 
 Supported file types for comment extraction:
+
 - JavaScript (.js)
 - TypeScript (.ts)
 - Python (.py)
@@ -108,15 +117,18 @@ Supported file types for comment extraction:
 ```bash
 txtspy scan <directory> [options]
 ```
+
 > If no option is provided, the `scan` command displays the structure of the specified directory and highlights which files are readable or unreadable based on their file extensions.
 
 Options:
+
 - `--search <word>`: Search for a specific word in all files in the directory
 - `--comments`: Extract and display comments from all code files in the directory
-- `--no-strict`: Use with --comments to enforce proper comment formatting (default mode: *strict*)
-- `--ignore <directory>, -I <directory>`: Specify a directory name to ignore during scanning 
+- `--no-strict`: Use with --comments to enforce proper comment formatting (default mode: _strict_)
+- `--ignore <directory>, -I <directory>`: Specify a directory name to ignore during scanning
 
 Example:
+
 ```bash
 # Show directory structure with readable/unreadable files
 txtspy scan ./src
@@ -136,7 +148,6 @@ txtspy scan . --ignore test
 txtspy scan . -I test
 ```
 
-
 #### Open a file or directory
 
 ```bash
@@ -146,6 +157,7 @@ txtspy open <path>
 Opens a file or directory with the default application associated with it.
 
 Example:
+
 ```bash
 # Open current directory
 txtspy open .
@@ -166,6 +178,7 @@ txtspy lang <language>
 Supported languages: `en` (English), `es` (Spanish)
 
 Example:
+
 ```bash
 txtspy lang es
 ```
@@ -186,7 +199,7 @@ txtspy -h
 #### Version
 
 ```bash
-txtspy --version 
+txtspy --version
 txtspy -v
 ```
 
