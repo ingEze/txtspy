@@ -23,7 +23,7 @@ txtspy is a command-line tool (CLI) for analyzing text files and managing direct
 Install globally from NPM:
 
 ```bash
-npm install -g txtspy
+npm install -g @ingeze/txtspy
 ```
 
 ## Usage

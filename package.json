@@ -1,11 +1,11 @@
 {
-  "name": "txtspy",
-  "version": "1.1.0",
+  "name": "@ingeze/txtspy",
+  "version": "1.1.6",
   "description": "A CLI tool for text search",
   "main": "dist/bin/txtspy.js",
   "type": "module",
   "bin": {
-    "txtspy": "./dist/bin/cli.js"
+    "txtspy": "dist/bin/txtspy.js"
   },
   "directories": {
     "lib": "lib",
@@ -24,6 +24,7 @@
   },
   "scripts": {
     "start": "node dist/bin/txtspy.js",
+    "prebuild": "rm -rf dist",
     "build": "esbuild bin/txtspy.ts --bundle --platform=node --target=node18 --outfile=dist/bin/txtspy.js --banner:js='#!/usr/bin/env node' --minify --format=esm",
     "dev": "tsx watch bin/txtspy.ts",
     "test": "jest",
@@ -31,7 +32,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/ingEze/txtspy.git"
+    "url": "git+https://github.com/ingEze/txtspy.git"
   },
   "keywords": [
     "cli",
@@ -44,6 +45,7 @@
   "license": "MIT",
   "dependencies": {
     "chalk": "^5.4.1",
+    "txtspy": "^1.1.1",
     "yargs": "^17.7.2"
   },
   "devDependencies": {

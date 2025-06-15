@@ -4,4 +4,4 @@ test/
 docs/
 *.log
 .env
-*.ts
+*.ts*.tgz

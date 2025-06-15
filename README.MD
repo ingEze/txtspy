@@ -9,6 +9,12 @@
   </a>
 </p>
 
+# Notice
+
+This package has been moved to [`@ingeze/txtspy`](https://www.npmjs.com/package/@ingeze/txtspy).
+
+Please update your dependencies:
+
 # Documentation / Documentación
 
 [<img src="https://upload.wikimedia.org/wikipedia/commons/a/a4/Flag_of_the_United_States.svg" width="40">](docs/en/README.md)
@@ -28,7 +34,7 @@
 ## Installation
 
 ```bash
-npm install -g txtspy
+npm install -g @ingeze/txtspy
 ```
 
 After installation, you can use txtspy from anywhere in your terminal:
